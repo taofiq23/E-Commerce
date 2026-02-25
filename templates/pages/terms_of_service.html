@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_title %}Terms of Service | Abrar Shop{% endblock %}
+{% block content %}
+<section class="bg-title-page p-t-60 p-b-50 flex-col-c-m" style="background-image:url('{% static 'images/34mpIkbEsTI9M.jpg' %}');">
+  <h2 class="l-text2 t-center">Terms of Service</h2>
+  <p class="m-text13 t-center">Rules for using Abrar Shop and placing orders.</p>
+</section>
+
+<section class="bgwhite p-t-65 p-b-65">
+  <div class="container">
+    <div class="card p-4 p-md-5">
+      <h3 class="m-text26 p-b-18">Use of Service</h3>
+      <p class="s-text8 p-b-16">
+        By accessing Abrar Shop, you agree to these terms, our privacy policy, and all applicable laws.
+        You are responsible for maintaining accurate account information and secure login credentials.
+      </p>
+
+      <h4 class="m-text20 p-b-12 p-t-12">Orders and Payments</h4>
+      <p class="s-text8 p-b-10">1. Orders are confirmed only after successful payment authorization.</p>
+      <p class="s-text8 p-b-10">2. We may cancel orders in case of stock issues, pricing errors, or fraud risk.</p>
+      <p class="s-text8 p-b-16">3. Refunds for canceled paid orders are processed to the original payment method.</p>
+
+      <h4 class="m-text20 p-b-12 p-t-12">Returns and Liability</h4>
+      <p class="s-text8 p-b-10">1. Return requests must follow the posted return/refund policy and timeline.</p>
+      <p class="s-text8 p-b-10">2. Product images are illustrative and may vary slightly by display settings.</p>
+      <p class="s-text8">3. For legal or account concerns, contact: <a href="mailto:abrar.shop@example.com">abrar.shop@example.com</a>.</p>
+    </div>
+  </div>
+</section>
+{% endblock content %}

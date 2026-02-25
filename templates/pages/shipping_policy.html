@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block head_title %}Shipping Policy | Abrar Shop{% endblock %}
+{% block content %}
+<section class="bg-title-page p-t-60 p-b-50 flex-col-c-m" style="background-image:url('{% static 'images/pngtree-outdoor-hiking-shoes-banner-pictures-image_877424.jpg' %}');">
+  <h2 class="l-text2 t-center">Shipping Policy</h2>
+  <p class="m-text13 t-center">Clear delivery timelines and tracking for every order.</p>
+</section>
+
+<section class="bgwhite p-t-65 p-b-65">
+  <div class="container">
+    <div class="card p-4 p-md-5">
+      <h3 class="m-text26 p-b-18">Delivery Timeline</h3>
+      <p class="s-text8 p-b-10">1. Standard shipping: 3 to 7 business days.</p>
+      <p class="s-text8 p-b-10">2. Priority shipping: 1 to 3 business days (selected locations).</p>
+      <p class="s-text8 p-b-16">3. Orders are processed Monday to Saturday, excluding public holidays.</p>
+
+      <h4 class="m-text20 p-b-12 p-t-12">Shipping Charges</h4>
+      <p class="s-text8 p-b-16">
+        Shipping cost is calculated at checkout based on destination, package weight, and selected delivery method.
+        Free shipping may apply during campaigns or on qualifying order totals.
+      </p>
+
+      <h4 class="m-text20 p-b-12 p-t-12">Tracking and Delays</h4>
+      <p class="s-text8 p-b-10">1. Tracking details are shared by email once an order is dispatched.</p>
+      <p class="s-text8 p-b-10">2. Weather, courier operations, or remote locations may cause delays.</p>
+      <p class="s-text8">3. For delivery issues, contact: <a href="mailto:abrar.shop@example.com">abrar.shop@example.com</a>.</p>
+    </div>
+  </div>
+</section>
+{% endblock content %}

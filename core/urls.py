@@ -17,7 +17,11 @@ from .views import (
     LoginView,
     LogoutView,
     ProfileView,
-    SearchView
+    SearchView,
+    about_us,
+    shipping_policy,
+    terms_of_service,
+    privacy_policy,
 )
 
 app_name = 'core'
@@ -44,4 +48,8 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile'),
     # Search URL
     path('search/', SearchView.as_view(), name='search'),
+    path('about-us/', about_us, name='about-us'),
+    path('shipping-policy/', shipping_policy, name='shipping-policy'),
+    path('terms-of-service/', terms_of_service, name='terms-of-service'),
+    path('privacy-policy/', privacy_policy, name='privacy-policy'),
 ]

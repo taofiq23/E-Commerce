@@ -12,11 +12,11 @@ from django.utils import timezone
 from django.db.models import Q
 from .forms import CheckoutForm, CouponForm, RefundForm, SearchForm
 from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund, Category
+from .image_utils import media_url_or_fallback
 
 # Create your views here.
 import random
 import string
-
 
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
@@ -185,6 +185,13 @@ class ItemDetailView(DetailView):
     model = Item
     template_name = "product-detail.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["product_image_url"] = media_url_or_fallback(
+            self.object.image, "images/61Fbt5Yyf2L._AC_UY1000_.jpg"
+        )
+        return context
+
 
 # class CategoryView(DetailView):
 #     model = Category
@@ -208,7 +215,9 @@ class CategoryView(View):
             'object_list': items,
             'category_title': category,
             'category_description': category.description,
-            'category_image': category.image,
+            'category_image_url': media_url_or_fallback(
+                category.image, "images/pngtree-outdoor-hiking-shoes-banner-pictures-image_877424.jpg"
+            ),
             'search_form': SearchForm(self.request.GET or None)
         }
         return render(self.request, "category.html", context)
@@ -513,6 +522,22 @@ class SearchView(View):
             'query': request.GET.get('q', '')
         }
         return render(request, 'search_results.html', context)
+
+
+def about_us(request):
+    return render(request, "pages/about_us.html")
+
+
+def shipping_policy(request):
+    return render(request, "pages/shipping_policy.html")
+
+
+def terms_of_service(request):
+    return render(request, "pages/terms_of_service.html")
+
+
+def privacy_policy(request):
+    return render(request, "pages/privacy_policy.html")
 
 class RequestRefundView(View):
     def get(self, *args, **kwargs):
