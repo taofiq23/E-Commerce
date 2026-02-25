@@ -1,0 +1,130 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+<style>
+    .refund-container {
+        padding: 40px 0;
+        min-height: 70vh;
+    }
+    
+    .refund-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 40px;
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px solid #eaeaea;
+    }
+    
+    .refund-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #232f3e;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .refund-subtitle {
+        color: #666;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 1rem;
+    }
+    
+    .refund-form .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .refund-form label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .refund-form input,
+    .refund-form textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+    
+    .refund-form input:focus,
+    .refund-form textarea:focus {
+        border-color: #146eb4;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(20, 110, 180, 0.1);
+    }
+    
+    .refund-btn {
+        background: #146eb4;
+        color: white;
+        border: none;
+        padding: 14px 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .refund-btn:hover {
+        background: #0d5a9e;
+    }
+    
+    .help-text {
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 5px;
+        display: block;
+    }
+    
+    @media (max-width: 768px) {
+        .refund-card {
+            padding: 25px;
+            margin: 0 15px;
+        }
+        
+        .refund-title {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+
+<div class="refund-container">
+    <div class="refund-card">
+        <h2 class="refund-title">Request Refund</h2>
+        <p class="refund-subtitle">Fill out the form below to request a refund for your order</p>
+        
+        <form method="POST" class="refund-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <span class="help-text">{{ field.help_text }}</span>
+                {% endif %}
+                {% if field.errors %}
+                    <div style="color: #dc3545; font-size: 0.9rem; margin-top: 5px;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="refund-btn">Submit Request</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

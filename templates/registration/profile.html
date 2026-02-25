@@ -1,0 +1,192 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .profile-container {
+        padding: 40px 0;
+        min-height: 70vh;
+    }
+    
+    .profile-header {
+        background: linear-gradient(135deg, #232f3e 0%, #146eb4 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+    }
+    
+    .profile-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .profile-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    
+    .orders-section {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 30px;
+        border: 1px solid #eaeaea;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #232f3e;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #ff9900;
+    }
+    
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .orders-table thead {
+        background: #f8f9fa;
+    }
+    
+    .orders-table th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        color: #333;
+        border-bottom: 2px solid #dee2e6;
+    }
+    
+    .orders-table td {
+        padding: 15px;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+    }
+    
+    .orders-table tr:hover {
+        background: #f8f9fa;
+    }
+    
+    .order-status {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: center;
+        display: inline-block;
+    }
+    
+    .status-pending {
+        background: #fff3cd;
+        color: #856404;
+    }
+    
+    .status-processing {
+        background: #cce5ff;
+        color: #004085;
+    }
+    
+    .status-shipped {
+        background: #d4edda;
+        color: #155724;
+    }
+    
+    .status-delivered {
+        background: #d1ecf1;
+        color: #0c5460;
+    }
+    
+    .no-orders {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        font-size: 1.1rem;
+    }
+    
+    .no-orders-icon {
+        font-size: 3rem;
+        color: #ddd;
+        margin-bottom: 20px;
+    }
+    
+    @media (max-width: 768px) {
+        .orders-table {
+            display: block;
+            overflow-x: auto;
+        }
+        
+        .profile-title {
+            font-size: 1.8rem;
+        }
+        
+        .profile-header {
+            padding: 20px;
+        }
+    }
+</style>
+
+<div class="profile-container">
+    <div class="container">
+        <div class="profile-header">
+            <h1 class="profile-title">My Profile</h1>
+            <p class="profile-subtitle">View your order history and account details</p>
+        </div>
+        
+        <div class="orders-section">
+            <h2 class="section-title">Order History</h2>
+            
+            {% if orders %}
+                <div class="table-responsive">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td><strong>{{ order.ref_code|default:"N/A" }}</strong></td>
+                                <td>{{ order.ordered_date|date:"M d, Y" }}</td>
+                                <td><strong>${{ order.get_total }}</strong></td>
+                                <td>
+                                    {% if order.ordered %}
+                                        {% if order.being_delivered %}
+                                            {% if order.received %}
+                                                <span class="order-status status-delivered">Delivered</span>
+                                            {% else %}
+                                                <span class="order-status status-shipped">Shipped</span>
+                                            {% endif %}
+                                        {% else %}
+                                            <span class="order-status status-processing">Processing</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="order-status status-pending">Pending</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="no-orders">
+                    <div class="no-orders-icon">📦</div>
+                    <p>You have no orders yet.</p>
+                    <a href="{% url 'core:shop' %}" class="btn btn-primary mt-3" style="background: #ff9900; border: none; padding: 10px 20px; border-radius: 6px; color: white; text-decoration: none; display: inline-block;">
+                        Start Shopping
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

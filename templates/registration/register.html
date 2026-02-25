@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    :root {
+        --primary-color: #232f3e;
+        --secondary-color: #146eb4;
+        --accent-color: #ff9900;
+    }
+    
+    .auth-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0;
+        background: linear-gradient(135deg, #f7f7f7 0%, #ffffff 100%);
+    }
+    
+    .auth-card {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        padding: 50px;
+        width: 100%;
+        max-width: 500px;
+        border: 1px solid #eaeaea;
+    }
+    
+    .auth-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        text-align: center;
+        letter-spacing: -0.5px;
+    }
+    
+    .auth-subtitle {
+        color: #666;
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+    
+    .auth-form .form-group {
+        margin-bottom: 25px;
+    }
+    
+    .auth-form label {
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+        display: block;
+        font-size: 1.1rem;
+    }
+    
+    .auth-form input {
+        width: 100%;
+        padding: 16px 20px;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .auth-form input:focus {
+        border-color: var(--secondary-color);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(20, 110, 180, 0.15);
+    }
+    
+    .auth-btn {
+        background: var(--secondary-color);
+        color: white;
+        border: none;
+        padding: 18px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+        letter-spacing: 0.5px;
+    }
+    
+    .auth-btn:hover {
+        background: #0d5a9e;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(20, 110, 180, 0.3);
+    }
+    
+    .auth-link {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+        font-size: 1.1rem;
+    }
+    
+    .auth-link a {
+        color: var(--secondary-color);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+    }
+    
+    .auth-link a:hover {
+        text-decoration: underline;
+    }
+    
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 12px;
+        border-radius: 6px;
+        margin-top: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+        .auth-card {
+            padding: 30px;
+            margin: 0 20px;
+        }
+        
+        .auth-title {
+            font-size: 2.2rem;
+        }
+        
+        .auth-subtitle {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="auth-title">CREATE ACCOUNT</h2>
+        <p class="auth-subtitle">Join us for a better shopping experience</p>
+        
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="alert-danger">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="auth-btn">CREATE ACCOUNT</button>
+        </form>
+        
+        <div class="auth-link">
+            <p>Already have an account? <a href="{% url 'core:login' %}">LOGIN HERE</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

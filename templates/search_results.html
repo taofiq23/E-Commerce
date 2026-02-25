@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load category_template_tags %}
+{% block content %}
+<style type="text/css">
+    /* Professional Modern Styles for Abrar Shop */
+    :root {
+        --primary-color: #232f3e;
+        --secondary-color: #ff9900;
+        --accent-color: #146eb4;
+        --light-bg: #f7f7f7;
+        --text-dark: #333;
+        --text-light: #666;
+        --border-color: #ddd;
+        --shadow: 0 2px 5px rgba(0,0,0,0.1);
+        --shadow-hover: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .selection-2{
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da !important;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
+    
+    /* Title improvements - Bigger and Bolder */
+    .l-text2 {
+        font-size: 3.5rem !important;
+        font-weight: 800 !important;
+        color: var(--primary-color) !important;
+        letter-spacing: -1px;
+        margin-bottom: 15px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .m-text13 {
+        font-size: 1.4rem !important;
+        color: var(--text-light) !important;
+        font-weight: 500;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    
+    /* Product card improvements */
+    .block2 {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: white;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        margin-bottom: 30px;
+    }
+    
+    .block2:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-hover);
+    }
+    
+    .block2-img img {
+        transition: transform 0.5s ease;
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+    }
+    
+    .block2:hover .block2-img img {
+        transform: scale(1.08);
+    }
+    
+    .block2-name {
+        font-size: 1.3rem !important;
+        font-weight: 700 !important;
+        color: var(--text-dark) !important;
+        line-height: 1.4;
+        margin-bottom: 10px;
+        display: block;
+        transition: color 0.3s ease;
+    }
+    
+    .block2-name:hover {
+        color: var(--accent-color) !important;
+        text-decoration: none;
+    }
+    
+    .block2-price {
+        font-size: 1.5rem !important;
+        font-weight: 800 !important;
+        color: var(--primary-color) !important;
+    }
+    
+    /* Button improvements */
+    .block2-btn-addcart {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .block2-btn-addcart a {
+        border-radius: 6px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase;
+        font-size: 0.9rem !important;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        text-align: center;
+        padding: 14px 10px !important;
+        min-height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .bg4 {
+        background-color: #f0f2f2 !important;
+        color: var(--text-dark) !important;
+        border: 2px solid #a6a6a6 !important;
+    }
+    
+    .bg4:hover {
+        background-color: #e7e9e9 !important;
+        border-color: #8b8b8b !important;
+        transform: translateY(-2px);
+    }
+    
+    .bg1 {
+        background-color: var(--secondary-color) !important;
+        color: white !important;
+        border: 2px solid var(--secondary-color) !important;
+    }
+    
+    .bg1:hover {
+        background-color: #e68a00 !important;
+        border-color: #e68a00 !important;
+        transform: translateY(-2px);
+    }
+    
+    /* Filter section improvements */
+    .leftbar {
+        background: white;
+        padding: 30px !important;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+    }
+    
+    .m-text14 {
+        font-size: 1.5rem !important;
+        font-weight: 800 !important;
+        color: var(--primary-color) !important;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid var(--secondary-color);
+    }
+    
+    /* Responsive improvements */
+    @media (max-width: 768px) {
+        .l-text2 {
+            font-size: 2.5rem !important;
+        }
+        
+        .block2 {
+            margin-bottom: 20px;
+        }
+        
+        .leftbar {
+            margin-bottom: 30px;
+        }
+    }
+    
+    /* Search form improvements */
+    .search-product {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid var(--border-color);
+        transition: all 0.3s ease;
+    }
+    
+    .search-product:focus-within {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(20, 110, 180, 0.1);
+    }
+    
+    .search-product input {
+        border: none !important;
+        padding-left: 25px !important;
+        font-size: 1rem;
+        height: 50px;
+    }
+    
+    .search-product button {
+        background: var(--accent-color);
+        border: none;
+        width: 60px;
+        transition: background 0.3s ease;
+    }
+    
+    .search-product button:hover {
+        background: #0d5a9e;
+    }
+    
+    /* Search results header */
+    .s-text8 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        background: var(--light-bg);
+        padding: 15px 25px;
+        border-radius: 8px;
+        border-left: 5px solid var(--accent-color);
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+    
+    /* Section header improvements */
+    .bg-title-page {
+        padding: 80px 0 !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+</style>
+
+	<!-- Title Page -->
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url({% static 'images/heading-pages-02.jpg' %});">
+		<h2 class="l-text2 t-center">
+			Search Results
+		</h2>
+		<p class="m-text13 t-center">
+			{% if query %}
+				Showing results for "{{ query }}"
+			{% else %}
+				Search our products
+			{% endif %}
+		</p>
+	</section>
+
+
+	<!-- Content page -->
+	<section class="bgwhite p-t-55 p-b-65">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
+					<div class="leftbar p-r-20 p-r-0-sm">
+						<!--  -->
+						<h4 class="m-text14 p-b-7">
+							Categories
+						</h4>
+
+						<ul class="p-b-54">
+							<li class="p-t-4">
+								<a href="/shop" class="s-text13 active1">
+									All
+								</a>
+							</li>
+
+							{% categories_li_a %}
+
+						</ul>
+
+						<!-- Search Form -->
+						<form method="GET" action="{% url 'core:search' %}" class="search-product pos-relative bo4 of-hidden mb-4">
+							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="q" placeholder="Search Products..." value="{{ query }}">
+							<button type="submit" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
+					<!--  -->
+					<div class="flex-sb-m flex-w p-b-35">
+						<div class="s-text8 p-t-5 p-b-5">
+							{% if results %}
+								Found {{ results|length }} result(s)
+							{% else %}
+								No results found
+							{% endif %}
+						</div>
+					</div>
+
+					<!-- Product -->
+					<div class="row">
+						{% for item in results %}
+						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+							<!-- Block2 -->
+							<div class="block2">
+								<a href="{{item.get_absolute_url}}">
+								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+									<img src="{{ item.image.url }}" alt="IMG-PRODUCT" onerror="this.onerror=null;this.src='{% static 'images/item-10.webp' %}';"
+								style="height: 360px;">
+									<div class="block2-overlay trans-0-4">
+										<div class="block2-btn-addcart w-size1 trans-0-4">
+											<!-- Add to Cart Button -->
+											<a href="{% url 'core:add-to-cart' item.slug %}" class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" style="margin-bottom: 5px;">
+												Add to Cart
+											</a>
+											<!-- Buy Now Button -->
+											<a href="{% url 'core:buy-now' item.slug %}" class="flex-c-m size1 bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+												Buy Now
+											</a>
+										</div>
+									</div>
+								</div>
+							</a>
+
+								<div class="block2-txt p-t-20">
+									<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+										{{item.title}}
+									</a>
+
+									<span class="block2-price m-text6 p-r-5">
+										${{item.price}}
+									</span>
+								</div>
+							</div>
+						</div>
+						{% empty %}
+						<div class="col-12">
+							<p class="text-center">No products found matching your search.</p>
+							<p class="text-center"><a href="{% url 'core:shop' %}" class="btn btn-primary">Browse All Products</a></p>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock content %}
