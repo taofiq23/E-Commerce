@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load image_template_tags %}
 {% block content %}
 
 	<!-- breadcrumb -->
@@ -27,9 +28,9 @@
 					<div class="wrap-slick3-dots"></div>
 
 					<div class="slick3">
-						<div class="item-slick3" data-thumb="{{ object.image.url }}">
+						<div class="item-slick3" data-thumb="{{ product_image_url }}">
 							<div class="wrap-pic-w">
-								<img src="{{ object.image.url }}" alt="{{ object.title }}" onerror="this.onerror=null;this.src='{% static 'images/item-10.webp' %}';">
+								<img src="{{ product_image_url }}" alt="{{ object.title }}" onerror="this.onerror=null;this.src='{% static 'images/Apple_Watch_Ultra_2_LTE_49mm_Titanium_Orange_Ocean_Band_PDP_Image_Avail_Position-1__en-IN_9ca47923-c612-46ac-a932-fbce9b5c705c.webp' %}';">
 							</div>
 						</div>
 

@@ -1,6 +1,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 
+from core.image_utils import media_url_or_fallback
 from core.models import Category
 
 register = template.Library()
@@ -42,9 +43,12 @@ def categories_div():
     items = Category.objects.filter(is_active=True).order_by('title')
     cards = []
     for item in items:
+        image_url = media_url_or_fallback(
+            item.image, "images/pngtree-outdoor-hiking-shoes-banner-pictures-image_877424.jpg"
+        )
         cards.append(
-            """<div class="block1 hov-img-zoom pos-relative m-b-30"><img src="/media/{}" alt="IMG-BENNER"><div class="block1-wrapbtn w-size2"><a href="/category/{}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">{}</a></div></div>""".format(
-                item.image, item.slug, item.title
+            """<div class="block1 hov-img-zoom pos-relative m-b-30"><img src="{}" alt="{}"><div class="block1-wrapbtn w-size2"><a href="/category/{}" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">{}</a></div></div>""".format(
+                image_url, item.title, item.slug, item.title
             )
         )
 

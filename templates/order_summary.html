@@ -1,5 +1,6 @@
 {% extends 'base.html' %} 
 {% load static %} 
+{% load image_template_tags %}
 {% block content %}
 
 <div class="container">
@@ -21,7 +22,7 @@
           <tr>
             <th scope="row">{{ forloop.counter }}</th>
             <td>
-			<img src="{{ order_item.item.image.url }}" style="width: 130px;" onerror="this.onerror=null;this.src='{% static 'images/item-10.webp' %}';"> 
+			<img src="{{ order_item.item.image|safe_image:'images/61Fbt5Yyf2L._AC_UY1000_.jpg' }}" style="width: 130px;" onerror="this.onerror=null;this.src='{% static 'images/Apple_Watch_Ultra_2_LTE_49mm_Titanium_Orange_Ocean_Band_PDP_Image_Avail_Position-1__en-IN_9ca47923-c612-46ac-a932-fbce9b5c705c.webp' %}';"> 
             </td>
             <td>{{ order_item.item.title }}</td>
             <td>{{ order_item.item.price }}</td>

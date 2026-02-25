@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load category_template_tags %}
+{% load image_template_tags %}
 {% block content %}
 <style type="text/css">
     /* Professional Modern Styles for Abrar Shop */
@@ -271,7 +272,7 @@
 </style>
 
 	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/static/images/heading-pages-02.jpg)	;">
+	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url({% static 'images/34mpIkbEsTI9M.jpg' %});">
 		<h2 class="l-text2 t-center">
 			Shop
 		</h2>
@@ -423,7 +424,7 @@
 							<div class="block2">
 								<a href="{{item.get_absolute_url}}">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="{{ item.image.url }}" alt="IMG-PRODUCT" onerror="this.onerror=null;this.src='{% static 'images/item-10.webp' %}';"
+									<img src="{{ item.image|safe_image:'images/61Fbt5Yyf2L._AC_UY1000_.jpg' }}" alt="IMG-PRODUCT" onerror="this.onerror=null;this.src='{% static 'images/Apple_Watch_Ultra_2_LTE_49mm_Titanium_Orange_Ocean_Band_PDP_Image_Avail_Position-1__en-IN_9ca47923-c612-46ac-a932-fbce9b5c705c.webp' %}';"
 								style="height: 360px;">
 
 									<div class="block2-overlay trans-0-4">
